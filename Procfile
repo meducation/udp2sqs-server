@@ -1,1 +1,1 @@
-worker: bundle exec ruby receiver.rb 
+web: bundle exec ruby receiver.rb $PORT 
