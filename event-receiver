@@ -1,13 +1,24 @@
 #!/usr/bin/env ruby
 
 require 'socket'
+require 'fog'
 
 port = ARGV[0]
 puts "Listening on port: #{port}"
 
+config = YAML.load_file("queue.yaml")
+
 s = UDPSocket.new
 s.bind('0.0.0.0', port)
+
+sqs = Fog::AWS::SQS.new(
+ :aws_access_key_id => config['access_key'],
+ :aws_secret_access_key => config['secret_key'],
+ :region => config['queue_region']
+)
+
 loop do
   text, sender = s.recvfrom(16)
+  sqs.send_message(config['queue_url'], message)
   puts text
 end
