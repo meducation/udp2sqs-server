@@ -18,7 +18,7 @@ sqs = Fog::AWS::SQS.new(
 )
 
 loop do
-  text, sender = s.recvfrom(16)
+  text, sender = s.recvfrom(1024)
   sqs.send_message(config['queue_url'], text)
   puts text
 end
