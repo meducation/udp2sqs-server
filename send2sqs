@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'fog'
+
+config = YAML.load_file("queue.yaml")
+message = ARGV[0]
+
+sqs = Fog::AWS::SQS.new(
+ :aws_access_key_id => config['access_key'],
+ :aws_secret_access_key => config['secret_key'],
+ :region => config['queue_region']
+)
+
+sqs.send_message(config['queue_url'], message)
