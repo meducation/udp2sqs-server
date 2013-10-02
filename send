@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+
+message = ARGV[0]
+hostname = ARGV[1]
+
+5.times do 
+  s = UDPSocket.new
+  s.send(message, 0, hostname, 9732)
+  puts "Completed"
+end
