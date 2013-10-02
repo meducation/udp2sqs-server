@@ -6,7 +6,7 @@ port = ARGV[0]
 puts "Listening on port: #{port}"
 
 s = UDPSocket.new
-s.bind(nil, port)
+s.bind('0.0.0.0', port)
 loop do
   text, sender = s.recvfrom(16)
   puts text
