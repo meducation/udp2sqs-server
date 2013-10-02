@@ -1,11 +1,13 @@
+#!/usr/bin/env ruby
+
 require 'socket'
 
 port = ARGV[0]
-puts port
+puts "Listening on port: #{port}"
 
 s = UDPSocket.new
 s.bind(nil, port)
-5.times do
+loop do
   text, sender = s.recvfrom(16)
   puts text
 end
