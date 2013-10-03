@@ -7,7 +7,7 @@ hostname = ARGV[1]
 
 i = 0
 1000.times do 
-	i += 1
+  i += 1
   s = UDPSocket.new
   msg = "#{message} #{i}"
   s.send(msg, 0, hostname, 9732)
