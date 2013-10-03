@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "udp2sqs_server"
+
+server = Udp2sqsServer::Server.new
+server.configure(host:ARGV[0], port:ARGV[1])
+server.run
