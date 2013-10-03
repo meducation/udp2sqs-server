@@ -5,8 +5,11 @@ require 'socket'
 message = ARGV[0]
 hostname = ARGV[1]
 
-5.times do 
+i = 0
+1000.times do 
+	i += 1
   s = UDPSocket.new
-  s.send(message, 0, hostname, 9732)
-  puts "Completed"
+  msg = "#{message} #{i}"
+  s.send(msg, 0, hostname, 9732)
+  puts "Sent #{i}"
 end
