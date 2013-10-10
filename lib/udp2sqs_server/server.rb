@@ -1,5 +1,5 @@
 require 'eventmachine'
-require "udp2sqs_server/instance"
+require_relative 'instance.rb'
 
 module Udp2sqsServer
   class Server
