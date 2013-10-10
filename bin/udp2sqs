@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require "udp2sqs_server"
+require_relative "../lib/udp2sqs_server.rb"
 
 Udp2sqsServer::Server.run(host: ARGV[0], port: ARGV[1])
