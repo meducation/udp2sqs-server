@@ -12,14 +12,10 @@ module Udp2sqsServer
     def initialize(options = {})
       @host = options.fetch(:host, "0.0.0.0")
       @port = options.fetch(:port, 9732)
-      EM.threadpool_size = options.fetch(:threadpool_size, 100)
     end
 
     def run
-      EM.run do
-        EM.defer { warmup_threads }
-        loop { store_message }
-      end
+      loop { store_message }
     end
 
     private
@@ -27,12 +23,7 @@ module Udp2sqsServer
     # Receives text and sender and saves it in SQS
     def store_message
       text = socket.recvfrom(1024)[0]
-      Em.defer { sqs.send_message(config['queue_url'], text) }
-    end
-
-    def warmup_threads
-      i = 0
-      i += 1
+      Thread.new { sqs.send_message(config['queue_url'], text) }
     end
 
     def socket
