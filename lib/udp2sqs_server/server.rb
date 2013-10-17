@@ -1,5 +1,5 @@
 require 'socket'
-require 'fog'
+require 'propono'
 
 module Udp2sqsServer
   class Server
@@ -11,6 +11,9 @@ module Udp2sqsServer
     def initialize(options = {})
       @host = options.fetch(:host, "0.0.0.0")
       @port = options.fetch(:port, 9732)
+
+      Propono.config.access_key = config.access_key
+      Propono.config.secret_key = config.secret_key
     end
 
     def run
@@ -22,7 +25,7 @@ module Udp2sqsServer
     # Receives text and sender and saves it in SQS
     def store_message
       text = socket.recvfrom(1024)[0]
-      Thread.new { sqs.send_message(config['queue_url'], text) }
+      Thread.new { Propono.publish(config.topic, text) }
     end
 
     def socket
@@ -34,17 +37,8 @@ module Udp2sqsServer
     end
 
     def config
-      @config ||= YAML.load_file("queue.yaml")
+      Configuration.instance
     end
-
-    def sqs
-      @sqs ||= Fog::AWS::SQS.new(
-       aws_access_key_id:     config['access_key'],
-       aws_secret_access_key: config['secret_key'],
-       region:                config['queue_region']
-      )
-    end
-
   end
 end
 
