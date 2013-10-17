@@ -6,8 +6,8 @@ require 'udp2sqs_server/version'
 Gem::Specification.new do |spec|
   spec.name          = "udp2sqs_server"
   spec.version       = Udp2sqsServer::VERSION
-  spec.authors       = ["MalcyL, mmmmmrob"]
-  spec.email         = ["malcolm@landonsonline.me.uk, rob@dynamicorange.com"]
+  spec.authors       = ["MalcyL, mmmmmrob", "iHiD"]
+  spec.email         = ["malcolm@landonsonline.me.uk, rob@dynamicorange.com", "jeremy@meducation.net"]
   spec.description   = %q{Simple UDP server. Posts UDP payloads to a configured AWS SQS queue.}
   spec.summary       = %q{See also udp2sqs-client}
   spec.homepage      = ""
