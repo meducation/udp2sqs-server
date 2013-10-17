@@ -19,9 +19,6 @@ class Minitest::Test
     Udp2sqsServer::Configuration.instance.access_key = "test-access-key"
     Udp2sqsServer::Configuration.instance.secret_key = "test-secret-key"
     Udp2sqsServer::Configuration.instance.topic = "test-topic"
-
-    Propono::Configuration.instance.access_key = "test-access-key"
-    Propono::Configuration.instance.secret_key = "test-secret-key"
   end
 
   def config
