@@ -7,11 +7,6 @@ module Udp2sqsServer
       new(*args).run
     end
 
-    # TODO Duplicated - but new.config is failing.
-    def self.config
-      Configuration.instance
-    end
-
     def initialize(options = {})
       @host = options.fetch(:host, "0.0.0.0")
       @port = options.fetch(:port, 9732)
@@ -22,7 +17,7 @@ module Udp2sqsServer
     end
 
     def run
-      Propono.listen_to_sqs do |text|
+      Propono.listen_to_udp(@host, @port) do |text|
         Propono.publish(config.topic, text)
       end
     end
