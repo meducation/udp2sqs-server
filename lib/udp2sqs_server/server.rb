@@ -13,10 +13,11 @@ module Udp2sqsServer
 
       Propono.config.access_key = config.access_key
       Propono.config.secret_key = config.secret_key
+      Propono.config.queue_region = config.queue_region
     end
 
     def run
-      Propono.listen_to_sqs do |text|
+      Propono.listen_to_udp(@host, @port) do |text|
         Propono.publish(config.topic, text)
       end
     end
