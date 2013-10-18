@@ -19,6 +19,9 @@ class Minitest::Test
     Udp2sqsServer::Configuration.instance.access_key = "test-access-key"
     Udp2sqsServer::Configuration.instance.secret_key = "test-secret-key"
     Udp2sqsServer::Configuration.instance.topic = "test-topic"
+    Udp2sqsServer::Configuration.instance.queue_region = "test-queue-region"
+    Udp2sqsServer::Configuration.instance.host = "http://udp.example.com"
+    Udp2sqsServer::Configuration.instance.port = 1234
   end
 
   def config

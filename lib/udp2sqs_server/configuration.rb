@@ -8,7 +8,11 @@ module Udp2sqsServer
   class Configuration
     include Singleton
 
-    SETTINGS = [:access_key, :secret_key, :queue_region, :topic]
+    SETTINGS = [
+      :access_key, :secret_key, :queue_region, 
+      :topic, 
+      :host, :port
+    ]
     attr_writer *SETTINGS
 
     SETTINGS.each do |setting|
