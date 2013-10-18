@@ -20,11 +20,8 @@ module Udp2sqsServer
     private
 
     def get_or_raise(setting)
-      if val = instance_variable_get("@#{setting.to_s}")
-        val
-      else
-        raise ConfigurationError.new("Configuration for #{setting} is not set")
-      end
+      instance_variable_get("@#{setting.to_s}") || 
+        raise(ConfigurationError.new("Configuration for #{setting} is not set"))
     end
   end
 end

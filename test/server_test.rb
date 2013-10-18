@@ -11,16 +11,9 @@ module Udp2sqsServer
       assert_equal config.secret_key, Propono.config.secret_key
     end
 
-    def test_message_is_stored
-      topic = "my-topic"
-      text = "Foobar123"
-      config.topic = topic
-      Propono.expects(:publish).with(topic, text)
-      server = Server.new
-      socket = mock(recvfrom: [text])
-      server.stubs(socket: socket)
-      thread = server.send(:store_message)
-      thread.join
+    def test_listen_to_sqs_in_called
+      Propono.expects(:listen_to_sqs)
+      Server.run
     end
   end
 end

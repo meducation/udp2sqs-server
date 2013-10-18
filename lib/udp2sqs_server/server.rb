@@ -1,4 +1,3 @@
-require 'socket'
 require 'propono'
 
 module Udp2sqsServer
@@ -17,24 +16,12 @@ module Udp2sqsServer
     end
 
     def run
-      loop { store_message }
+      Propono.listen_to_sqs do |text|
+        Propono.publish(config.topic, text)
+      end
     end
 
     private
-
-    # Receives text and sender and saves it in SQS
-    def store_message
-      text = socket.recvfrom(1024)[0]
-      Thread.new { Propono.publish(config.topic, text) }
-    end
-
-    def socket
-      @socket ||= begin
-        socket = UDPSocket.new
-        socket.bind(@host, @port)
-        socket
-      end
-    end
 
     def config
       Configuration.instance

@@ -20,7 +20,7 @@ And then execute:
 
     $ bundle
 
-To complete the instalation copy queue.yaml.example to queue.yaml and fill in your
+To complete the installation copy queue.yaml.example to queue.yaml and fill in your
 
 * aws-access-key
 * aws-secret-key
