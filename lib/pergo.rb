@@ -2,7 +2,7 @@ require "pergo/version.rb"
 require "pergo/configuration.rb"
 require "pergo/server.rb"
 
-module Udp2sqsServer
+module Pergo
 
   def self.config
     Configuration.instance

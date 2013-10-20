@@ -9,8 +9,8 @@ module Pergo
     include Singleton
 
     SETTINGS = [
-      :access_key, :secret_key, :queue_region, 
-      :topic, 
+      :access_key, :secret_key, :queue_region,
+      :topic,
       :host, :port
     ]
     attr_writer *SETTINGS
