@@ -1,6 +1,6 @@
 require 'propono'
 
-module Udp2sqsServer
+module Pergo
   class Server
 
     def self.run(*args)
@@ -14,10 +14,12 @@ module Udp2sqsServer
       Propono.config.access_key = config.access_key
       Propono.config.secret_key = config.secret_key
       Propono.config.queue_region = config.queue_region
+      Propono.config.udp_host = config.host
+      Propono.config.udp_port = config.port
     end
 
     def run
-      Propono.listen_to_udp(@host, @port) do |text|
+      Propono.listen_to_udp do |text|
         Propono.publish(config.topic, text)
       end
     end

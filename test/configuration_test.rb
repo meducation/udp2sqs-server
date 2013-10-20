@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper', __FILE__)
 
-module Udp2sqsServer
+module Pergo
   class ConfigurationTest < Minitest::Test
     def config
       @config ||= Configuration.send(:new)
@@ -28,10 +28,22 @@ module Udp2sqsServer
       assert_equal secret_key, config.secret_key
     end
 
-    def test_topic
-      topic = "test-topic"
-      config.topic = topic
-      assert_equal topic, config.topic
+    def test_queue_region
+      val = "test-topic"
+      config.queue_region = val
+      assert_equal val, config.queue_region
+    end
+
+    def test_queue_udp_host
+      val = "test-topic"
+      config.host = val
+      assert_equal val, config.host
+    end
+
+    def test_udp_port
+      val = "test-topic"
+      config.port = val
+      assert_equal val, config.port
     end
 
     def test_missing_access_key_throws_exception
