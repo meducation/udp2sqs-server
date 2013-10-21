@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+require "propono"
+
+# Send a message over UDP to pergo
+#
+# example usage:
+#
+# ruby ./bin/udp-send localhost 9732 test-topic "test-message"
+
+host = ARGV[0]
+port = ARGV[1]
+topic = ARGV[2]
+message = ARGV[3]
+
+c = YAML.load_file("config.yml")
+Propono.config do |config|
+  config.access_key = c["access_key"]
+  config.secret_key = c["secret_key"]
+  config.queue_region = c["queue_region"]
+  config.application_name = "udp-send"
+  config.udp_host = host
+  config.udp_port = port
+end
+
+Propono.publish(topic, message, protocol: :udp)
